@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrowdSourceRadioApplication {
+public class CrowdsourceRadioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrowdSourceRadioApplication.class, args);
+		SpringApplication.run(CrowdsourceRadioApplication.class, args);
 	}
 
 }
