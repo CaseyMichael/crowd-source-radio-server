@@ -7,6 +7,7 @@ steps:
   - wait
 
   - label: ":buildkite:"
+    if: build.branch != "production"
     plugins:
       - caseymichael/clubhouse-buildkite-status-badge#v0.0.5:
           CLUBHOUSE_API_TOKEN: "$CLUBHOUSE_API_TOKEN"
