@@ -16,6 +16,12 @@ steps:
           BUILDKITE_PIPELINE_URL: "https://buildkite.com/peters"
           BUILDKITE_PIPELINE_BADGE_URL: "https://badge.buildkite.com/9650d50ed3ffb1074a6e44e09e653a27a8d265565074f97415.svg"
 
+  - label: ":java: Lint"
+    command: .scripts/lint.sh
+    plugins:
+      - docker-compose#v3.7.0:
+          run: app
+
   - label: ":junit: Test"
     command: .scripts/test.sh
     plugins:
