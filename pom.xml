@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.peters</groupId>
 	<artifactId>crowdsourceradio</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Crowdsource Radio</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -70,6 +70,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>crowdsourceradio</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
