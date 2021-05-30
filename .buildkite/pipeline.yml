@@ -2,4 +2,10 @@ steps:
   - plugins:
       - docker-compose#v3.7.0:
           build: app
-          image:repository: caseymichael/peters
+  
+  - wait
+
+  - command: .scripts/test.sh
+    plugins:
+      - docker-compose#v3.7.0:
+          run: app
