@@ -1,13 +1,13 @@
 steps:
-  label: ":docker: Build"
-  - plugins:
+  - label: ":docker: Build"
+    plugins:
       - docker-compose#v3.7.0:
           build: app
   
   - wait
 
-  - command: .scripts/test.sh
-    label: ":junit: Test"
+  - label: ":junit: Test"
+    command: .scripts/test.sh
     plugins:
       - docker-compose#v3.7.0:
           run: app
