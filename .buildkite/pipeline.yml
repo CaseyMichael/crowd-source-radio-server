@@ -6,6 +6,15 @@ steps:
   
   - wait
 
+  - label: ":buildkite:"
+    plugins:
+      - caseymichael/clubhouse-buildkite-status-badge#v0.0.5:
+          CLUBHOUSE_API_TOKEN: "$CLUBHOUSE_API_TOKEN"
+          BUILDKITE_BRANCH: "$BUILDKITE_BRANCH"
+          REPOSITORY_NAME: "crowdsource-radio-server"
+          BUILDKITE_PIPELINE_URL: "https://buildkite.com/peters"
+          BUILDKITE_PIPELINE_BADGE_URL: "https://badge.buildkite.com/9650d50ed3ffb1074a6e44e09e653a27a8d265565074f97415.svg"
+
   - label: ":junit: Test"
     command: .scripts/test.sh
     plugins:
