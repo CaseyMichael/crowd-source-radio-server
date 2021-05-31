@@ -9,10 +9,10 @@ COPY .scripts/ .scripts
 COPY .k8s/ .k8s
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw dependency:go-offline -q
 
 COPY src ./src
-RUN ./mvnw package -DskipTests
+RUN ./mvnw package -DskipTests -q
 
 #
 # Package Stage

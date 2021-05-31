@@ -13,7 +13,7 @@ manifest="$(mktemp)"
 
 echo '--- :kubernetes: Shipping'
 
-envsubst < k8s/deployment.yml > "${manifest}"
+envsubst < .k8s/deployment.yml > "${manifest}"
 kubectl apply -f "${manifest}"
 
 echo '--- :zzz: Waiting for deployment'
