@@ -25,7 +25,7 @@ ENTRYPOINT [ "java", "-jar", "crowdsourceradio.jar" ]
 # Deploy Stage
 #
 FROM gcr.io/google.com/cloudsdktool/cloud-sdk as deploy
+RUN apt-get update
+RUN apt-get install -y gettext
 COPY .k8s/ .k8s
 COPY .scripts/ .scripts
-RUN kubectl --help
-# RUN gcloud container clusters get-credentials buildkite-agent-cluster
