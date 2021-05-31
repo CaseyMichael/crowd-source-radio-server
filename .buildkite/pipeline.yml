@@ -1,6 +1,9 @@
 steps:
   - label: ":docker: Build"
     plugins:
+      - docker-login#v2.0.1:
+          username: $DOCKER_LOGIN_USERNAME
+          password-env: $DOCKER_LOGIN_PASSWORD
       - docker-compose#v3.7.0:
           build: ci
           image-repository: index.docker.io/caseymichael/peters
