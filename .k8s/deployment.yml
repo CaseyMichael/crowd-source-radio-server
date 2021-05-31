@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crowdsourceradioserver
+  labels:
+    app: crowdsourceradioserver
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: crowdsourceradioserver
+  template:
+    metadata:
+      labels:
+        app: tutorial
+    spec:
+      containers:
+        - name: app
+          image: "${DOCKER_IMAGE}"
+          ports:
+            - containerPort: 8080

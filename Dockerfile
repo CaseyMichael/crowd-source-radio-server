@@ -1,7 +1,7 @@
 #
 # Build Stage
 # 
-FROM openjdk:16.0.1-jdk-slim as build
+FROM openjdk:16.0.1-jdk-slim as builder
 
 WORKDIR /app
 

@@ -1,6 +1,9 @@
 version: "3.7"
 services:
-    app:
+    ci:
         build: 
             context: .
-            target: build
+            target: builder
+    app:
+        build:
+            context: .

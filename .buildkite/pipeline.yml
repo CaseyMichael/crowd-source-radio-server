@@ -2,7 +2,7 @@ steps:
   - label: ":docker: Build"
     plugins:
       - docker-compose#v3.7.0:
-          build: app
+          build: ci
   
   - wait
 
@@ -20,10 +20,27 @@ steps:
     command: .scripts/lint.sh
     plugins:
       - docker-compose#v3.7.0:
-          run: app
+          run: ci
 
   - label: ":junit: Test"
     command: .scripts/test.sh
     plugins:
       - docker-compose#v3.7.0:
-          run: app
+          run: ci
+
+  - wait
+
+  - label: ":docker: Push"
+    plugins:
+      - docker-compose#v3.7.0:
+          build: app
+      - docker-compose#v3.7.0:
+          push: app
+  
+  # - wait
+
+  # - label: ":kubernetes: Deploy"
+  #   command: .scripts/deploy.sh
+  #   plugins:
+  #     - docker-compose#v3.7.0:
+  #         run: ci
