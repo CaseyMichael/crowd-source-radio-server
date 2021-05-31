@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+DOCKER_IMAGE="$BUILDKITE_PIPELINE_SLUG
+
 if [ -z "${DOCKER_IMAGE:-}" ]; then
   echo ":boom: \$DOCKER_IMAGE missing" 1>&2
   exit 1

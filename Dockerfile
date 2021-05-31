@@ -17,6 +17,6 @@ RUN ./mvnw package -DskipTests
 # Package Stage
 # 
 FROM openjdk:16.0.1-jdk-slim
-COPY --from=build /app/target/crowdsourceradio.jar crowdsourceradio.jar
+COPY --from=builder /app/target/crowdsourceradio.jar crowdsourceradio.jar
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "crowdsourceradio.jar" ]
