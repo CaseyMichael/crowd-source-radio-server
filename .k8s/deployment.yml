@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crowdsourceradioserver
+  creationTimestamp: null
   labels:
     app: crowdsourceradioserver
+  name: crowdsourceradioserver
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: crowdsourceradioserver
+  strategy: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        app: tutorial
+        app: crowdsourceradioserver
     spec:
       containers:
-        - name: app
-          image: "${DOCKER_IMAGE}"
-          ports:
-            - containerPort: 8080
+      - image: "${DOCKER_IMAGE}"
+        name: peters
+        resources: {}
+status: {}
