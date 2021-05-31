@@ -1,6 +1,5 @@
 steps:
   - label: ":docker: Build"
-    command: "echo $DOCKER_LOGIN_USERNAME"
     plugins:
       - docker-login#v2.0.1:
           username: $DOCKER_LOGIN_USERNAME
@@ -38,6 +37,7 @@ steps:
     plugins:
       - docker-compose#v3.7.0:
           build: app
+          image-name: crowdsourceradioserver
           image-repository: index.docker.io/caseymichael/peters
   
   # - wait
