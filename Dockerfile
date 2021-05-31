@@ -27,3 +27,6 @@ ENTRYPOINT [ "java", "-jar", "crowdsourceradio.jar" ]
 FROM ubuntu:latest as deploy
 COPY .k8s/ .k8s
 COPY .scripts/ .scripts
+
+RUN apt-get update
+RUN apt-get install -y gettext
