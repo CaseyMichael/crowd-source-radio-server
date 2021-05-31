@@ -11,7 +11,7 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline
 
 COPY src ./src
-RUN ./mvnw package
+RUN ./mvnw package -DskipTests
 
 #
 # Package Stage

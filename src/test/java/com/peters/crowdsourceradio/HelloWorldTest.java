@@ -1,4 +1,4 @@
-package com.peters.crowdsourceradio.integration;
+package com.peters.crowdsourceradio;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
