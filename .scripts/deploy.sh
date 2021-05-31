@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-DOCKER_IMAGE="$BUILDKITE_PIPELINE_SLUG
+DOCKER_IMAGE="caseymichael/peters:crowdsourceradioserver-${BUILDKITE_BUILD_NUMBER}"
 
 if [ -z "${DOCKER_IMAGE:-}" ]; then
   echo ":boom: \$DOCKER_IMAGE missing" 1>&2

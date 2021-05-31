@@ -37,13 +37,13 @@ steps:
     plugins:
       - docker-compose#v3.7.0:
           build: app
-          image-name: crowdsourceradioserver
-          image-repository: index.docker.io/caseymichael/peters
+          image-name: crowdsourceradioserver-$BUILDKITE_BUILD_NUMBER
+          image-repository: caseymichael/peters
   
-  # - wait
+  - wait
 
-  # - label: ":kubernetes: Deploy"
-  #   command: .scripts/deploy.sh
-  #   plugins:
-  #     - docker-compose#v3.7.0:
-  #         run: ci
+  - label: ":kubernetes: Deploy"
+    command: .scripts/deploy.sh
+    plugins:
+      - docker-compose#v3.7.0:
+          run: ci
