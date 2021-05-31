@@ -6,30 +6,31 @@ steps:
       - docker-compose#v3.7.0:
           build: ci
           image-repository: caseymichael/peters
+          cache-from: ci:caseymichael/peters
   
   - wait
 
-  - label: ":buildkite: Clubhouse Badge"
-    if: build.branch != "production"
-    plugins:
-      - caseymichael/clubhouse-buildkite-status-badge#v0.0.5:
-          CLUBHOUSE_API_TOKEN: "$CLUBHOUSE_API_TOKEN"
-          BUILDKITE_BRANCH: "$BUILDKITE_BRANCH"
-          REPOSITORY_NAME: "crowdsourceradioserver"
-          BUILDKITE_PIPELINE_URL: "https://buildkite.com/peters"
-          BUILDKITE_PIPELINE_BADGE_URL: "https://badge.buildkite.com/9650d50ed3ffb1074a6e44e09e653a27a8d265565074f97415.svg"
+  # - label: ":buildkite: Clubhouse Badge"
+  #   if: build.branch != "production"
+  #   plugins:
+  #     - caseymichael/clubhouse-buildkite-status-badge#v0.0.5:
+  #         CLUBHOUSE_API_TOKEN: "$CLUBHOUSE_API_TOKEN"
+  #         BUILDKITE_BRANCH: "$BUILDKITE_BRANCH"
+  #         REPOSITORY_NAME: "crowdsourceradioserver"
+  #         BUILDKITE_PIPELINE_URL: "https://buildkite.com/peters"
+  #         BUILDKITE_PIPELINE_BADGE_URL: "https://badge.buildkite.com/9650d50ed3ffb1074a6e44e09e653a27a8d265565074f97415.svg"
 
-  - label: ":java: Lint"
-    command: .scripts/lint.sh
-    plugins:
-      - docker-compose#v3.7.0:
-          run: ci
+  # - label: ":java: Lint"
+  #   command: .scripts/lint.sh
+  #   plugins:
+  #     - docker-compose#v3.7.0:
+  #         run: ci
 
-  - label: ":junit: Test"
-    command: .scripts/test.sh
-    plugins:
-      - docker-compose#v3.7.0:
-          run: ci
+  # - label: ":junit: Test"
+  #   command: .scripts/test.sh
+  #   plugins:
+  #     - docker-compose#v3.7.0:
+  #         run: ci
 
   # - wait
 
@@ -47,3 +48,5 @@ steps:
     plugins:
       - docker-compose#v3.7.0:
           run: ci
+          env:
+            - BUILDKITE_BUILD_NUMBER
