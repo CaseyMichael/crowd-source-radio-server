@@ -45,8 +45,3 @@ steps:
 
   - label: ":kubernetes: Deploy"
     command: .scripts/deploy.sh
-    plugins:
-      - docker-compose#v3.7.0:
-          run: deploy
-          env:
-            - BUILDKITE_BUILD_NUMBER
