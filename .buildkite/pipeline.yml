@@ -3,6 +3,7 @@ steps:
     plugins:
       - docker-compose#v3.7.0:
           build: ci
+          image-repository: index.docker.io/caseymichael/peters
   
   - wait
 
@@ -28,14 +29,13 @@ steps:
       - docker-compose#v3.7.0:
           run: ci
 
-  - wait
+  # - wait
 
   - label: ":docker: Push"
     plugins:
       - docker-compose#v3.7.0:
           build: app
-      - docker-compose#v3.7.0:
-          push: app
+          image-repository: index.docker.io/caseymichael/peters
   
   # - wait
 
