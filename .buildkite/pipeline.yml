@@ -1,5 +1,6 @@
 steps:
   - label: ":docker: Build"
+    command: "echo $DOCKER_LOGIN_USERNAME"
     plugins:
       - docker-login#v2.0.1:
           username: $DOCKER_LOGIN_USERNAME
