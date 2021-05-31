@@ -7,3 +7,8 @@ services:
     app:
         build:
             context: .
+            target: package
+    deploy:
+        build:
+            context: .
+            target: deploy
