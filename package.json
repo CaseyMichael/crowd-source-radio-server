@@ -11,5 +11,8 @@
     "url": "CaseyMichael:CaseyMichael/crowd-source-radio-server.git"
   },
   "author": "Casey Peters",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
