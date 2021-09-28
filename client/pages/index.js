@@ -1,9 +1,11 @@
 import Head from 'next/head'
-import { Container, Grid, Card, CardHeader, CardContent, Typography, TextField, LinearProgress, FormControl, IconButton, GlobalStyles, ListItemText, List, ListItem, Tooltip } from '@mui/material'
+import { Grid, Card, CardHeader, CardContent, Typography, TextField, LinearProgress, FormControl, IconButton, GlobalStyles, ListItemText, List, ListItem, Tooltip } from '@mui/material'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+
+import { useState, useEffect } from 'react'
 
 let green = '#008083';
 let blue = '#000080';
@@ -66,13 +68,14 @@ function NowPlaying() {
             <PauseCircleOutlineIcon />
           </IconButton>
         </Tooltip>
-        <LinearProgress variant="determinate" value="20"></LinearProgress>
+        <LinearProgress variant="determinate" value={20}></LinearProgress>
       </CardContent>
     </Card>
   )
 }
 
-function UpNext() {
+function UpNext(items) {
+  console.log(items);
   return (
     <Card variant="outlined"
       sx={{
@@ -101,7 +104,11 @@ function UpNext() {
         }}
       >
         <List>
-            {song("THATS WHAT I WANT", "Lil Nas X")}
+            {
+              items.map(function(item) {
+                return song(item.data.title, item.data.artist)
+              })
+            }
         </List>
       </CardContent>
     </Card>
@@ -157,6 +164,35 @@ function Discover() {
 }
 
 export default function Home() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+
+  // Note: the empty deps array [] means
+  // this useEffect will run once
+  // similar to componentDidMount()
+  useEffect(() => {
+    fetch("http://localhost:3001/api/queue")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setIsLoaded(true);
+          setItems(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log(error);
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [])
+  if (error) {
+    return <div>Error: {error.message}</div>
+  } else {
   return (
     <div className="container">
       <Head>
@@ -171,13 +207,12 @@ export default function Home() {
       ></GlobalStyles>
 
       <main>
-        {/* <LinearProgress color="secondary" /> */}
         <Grid container>
           <Grid item xs={12} md={8}>
             {NowPlaying()}
           </Grid>
           <Grid item xs={12} md={4}>
-            {UpNext()}
+            {UpNext(items)}
           </Grid>
           <Grid item xs={12} md={8}>
             {Discover()}
@@ -189,4 +224,5 @@ export default function Home() {
       </footer>
     </div>
   )
+      }
 }
