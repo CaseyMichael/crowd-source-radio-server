@@ -27,7 +27,37 @@ function song(title, artist) {
   )
 }
 
+function calculateProgress(startTime, songLength) {
+  let start = new Date(startTime);
+  let now = new Date();
+  let seconds = Math.abs((now - start) / 1000);
+  return seconds / songLength;
+}
+
 function NowPlaying() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/queue/playing")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setIsLoaded(true);
+          setItems(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log(error);
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [])
   return (
     <Card variant="outlined"
       sx={{
@@ -56,8 +86,8 @@ function NowPlaying() {
           bgcolor: gray
         }}
       >
-        <Typography variant="h5" component="div">Song Title</Typography>
-        <Typography variant="subtitle1" component="div" color="text.secondary">Artist</Typography>
+        <Typography variant="h5" component="div">{items.title}</Typography>
+        <Typography variant="subtitle1" component="div" color="text.secondary">{items.artist}</Typography>
         <Tooltip title="Play">
           <IconButton aria-label="play">
             <PlayCircleOutlineIcon />
@@ -68,7 +98,7 @@ function NowPlaying() {
             <PauseCircleOutlineIcon />
           </IconButton>
         </Tooltip>
-        <LinearProgress variant="determinate" value={20}></LinearProgress>
+        <LinearProgress variant="determinate" value={calculateProgress(items.startTime, items.length)}></LinearProgress>
       </CardContent>
     </Card>
   )
@@ -103,13 +133,7 @@ function UpNext(items) {
           bgcolor: gray
         }}
       >
-        <List>
-            {
-              items.map(function(item) {
-                return song(item.data.title, item.data.artist)
-              })
-            }
-        </List>
+        <List> { items.map(function(item) { return song(item.data.title, item.data.artist) }) } </List>
       </CardContent>
     </Card>
   )
@@ -210,12 +234,10 @@ export default function Home() {
         <Grid container>
           <Grid item xs={12} md={8}>
             {NowPlaying()}
+            {Discover()}
           </Grid>
           <Grid item xs={12} md={4}>
             {UpNext(items)}
-          </Grid>
-          <Grid item xs={12} md={8}>
-            {Discover()}
           </Grid>
         </Grid>
       </main>
@@ -226,3 +248,4 @@ export default function Home() {
   )
       }
 }
+
