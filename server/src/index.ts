@@ -2,10 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import { Request, Response } from "express";
 import { QueueManagementLib } from "./QueueManagementLib";
+import cors from "cors";
 
 var jsonParser = bodyParser.json();
 const app = express()
-const port = 3000
+app.use(cors())
+const port = 3001
 
 let queueManagement = new QueueManagementLib();
 

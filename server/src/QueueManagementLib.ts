@@ -13,15 +13,15 @@ export class QueueManagementLib {
         this.queue = new RankedBasedQueue<Song>();
 
         //temp data for testing, in a more real environment we would load the queue from a data store.
-        let bohemianRhapsody = new Song("Bohemian Rhapsody", "Queen", 30);
+        let bohemianRhapsody = new Song("Bohemian Rhapsody", "Queen", 3000);
         let bohemianRhapsodyQueueElement = new RankedBasedQueueElement<Song>("53208116-4d42-4283-9bbe-39abf70b13b0", 0, bohemianRhapsody);
-        let dontStopBelievin = new Song("Don't Stop Believin", "Journey", 30);
+        let dontStopBelievin = new Song("Don't Stop Believin", "Journey", 3000);
         let dontStopBelievinQueueElement = new RankedBasedQueueElement<Song>("da0f6ca9-6f03-4e90-9002-3e9f6ed2eced", 0, dontStopBelievin);
-        let livinOnAPrayer = new Song("Livin' On A Prayer", "Bon Jovi", 30);
+        let livinOnAPrayer = new Song("Livin' On A Prayer", "Bon Jovi", 3000);
         let livinOnAPrayerQueueElement = new RankedBasedQueueElement<Song>("35a5c40b-5ac2-4263-98da-361becc6fd16", 0, livinOnAPrayer);
-        let babyOneMoreTime = new Song("Baby One More Time", "Britney Spears", 30);
+        let babyOneMoreTime = new Song("Baby One More Time", "Britney Spears", 3000);
         let babyOneMoreTimeQueueElement = new RankedBasedQueueElement<Song>("f1ba0135-082c-4cc3-a95f-d07adf26539d", 0, babyOneMoreTime);
-        let dancingQueen = new Song("Dancing Queen", "ABBA", 30);
+        let dancingQueen = new Song("Dancing Queen", "ABBA", 3000);
         let dancingQueenQueueElement = new RankedBasedQueueElement<Song>("5df86a99-ecea-4a72-a0c5-aa84337f410d", 0, dancingQueen);
         this.queue.enqueue(bohemianRhapsodyQueueElement);
         this.queue.enqueue(dontStopBelievinQueueElement);
